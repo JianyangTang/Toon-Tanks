@@ -12,3 +12,6 @@ We don't need the header to declare a pointer.
 Lesson 113: Constructed a Capsule Component, made it the root component.
 
 Lesson 114: Create Components in C++ file, and attach them.
+
+Lesson 115: Derived child blueprints from BasePawn class,but the component in it can't be edit and the propery is blank.
+
