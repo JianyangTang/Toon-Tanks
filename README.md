@@ -22,3 +22,5 @@ Lesson 117: UPROPERTY() 's specifiers, such as EditAnywhere, VisibleInstanceOnly
 Lesson 118: Expose the components in C++ class to blueprint, by code: 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* BaseMesh;
+
+Lesson 119: Create child C class: create Tank class based on BasePawn
