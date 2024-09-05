@@ -1,3 +1,5 @@
+Tips: if you want knock fewer keyboards, you can install an extension: Visual Assist, it's really useful.
+
 Lesson 110: Create a blank C++ Pawn Class.
 
 Lesson 111: Learn 'Components' in blueprints, each actor has a root component and root component can be replaced by other useful component, such as capsule component.
