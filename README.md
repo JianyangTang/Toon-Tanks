@@ -15,3 +15,10 @@ Lesson 114: Create Components in C++ file, and attach them.
 
 Lesson 115: Derived child blueprints from BasePawn class,but the component in it can't be edit and the propery is blank.
 
+Lesson 116: the difference between Instance & Default, Instance is the actual thing in world, Default is a abstract blurprint or class that doesn't exist in the level.
+
+Lesson 117: UPROPERTY() 's specifiers, such as EditAnywhere, VisibleInstanceOnly and so on;
+
+Lesson 118: Expose the components in C++ class to blueprint, by code: 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* BaseMesh;
