@@ -15,3 +15,4 @@ Lesson 114: Create Components in C++ file, and attach them.
 
 Lesson 115: Derived child blueprints from BasePawn class,but the component in it can't be edit and the propery is blank.
 
+Lesson 116: Learn UPROPERTY specifers, such as VisibleAnywhere, EidtInstanceOnly, EditDefaultsOnly.
