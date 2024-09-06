@@ -24,3 +24,6 @@ Lesson 118: Expose the components in C++ class to blueprint, by code:
 	UStaticMeshComponent* BaseMesh;
 
 Lesson 119: Create child C class: create Tank class based on BasePawn
+
+Lesson 120: Set Auto Possess Player of Tank instance to Player 0.
+
