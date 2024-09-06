@@ -27,3 +27,4 @@ Lesson 119: Create child C class: create Tank class based on BasePawn
 
 Lesson 120: Set Auto Possess Player of Tank instance to Player 0.
 
+Lesson 121: Bind axis mapping to function.
