@@ -44,12 +44,14 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ATank::Action_ControllerMoveForward(const FInputActionValue &value)
 {
 	FVector DeltaLocation = FVector::ZeroVector;
-	DeltaLocation.X = Speed * value.GetMagnitude() * UGameplayStatics::GetWorldDeltaSeconds(this);
-	AddActorLocalOffset(DeltaLocation);
+	DeltaLocation.X = MoveSpeed * value.GetMagnitude() * UGameplayStatics::GetWorldDeltaSeconds(this);
+	AddActorLocalOffset(DeltaLocation, true);
 }
 void ATank::Action_ControllerTurn(const FInputActionValue &value)
 {
-	UE_LOG(LogTemp, Display, TEXT("Turn Value: %f"), value.Get<float>());
+	FRotator DeltaRotation = FRotator::ZeroRotator;
+	DeltaRotation.Yaw = - TurnSpeed * value.GetMagnitude() * UGameplayStatics::GetWorldDeltaSeconds(this);
+	AddActorLocalRotation(DeltaRotation, true);
 }
 void ATank::Action_ControllerRotateTurret(const FInputActionValue &value)
 {
