@@ -26,6 +26,15 @@ void ABasePawn::BeginPlay()
 	
 }
 
+void ABasePawn::RotateTurret(FVector LookAtLocation)
+{
+	FVector ToTarget = LookAtLocation - TurretMesh->GetComponentLocation();
+	FRotator LookAtRotation = ToTarget.Rotation();
+	LookAtRotation.Pitch = 0.f;
+	LookAtRotation.Roll = 0.f;
+	TurretMesh->SetWorldRotation(LookAtRotation);
+}
+
 // Called every frame
 void ABasePawn::Tick(float DeltaTime)
 {

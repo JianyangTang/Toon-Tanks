@@ -6,8 +6,6 @@
 #include "BasePawn.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-//#include "InputActionValue.h"
-//#include "InputMappingContext.h"
 #include "Tank.generated.h"
 
 /**

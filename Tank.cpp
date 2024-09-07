@@ -6,8 +6,6 @@
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "DrawDebugHelpers.h"
-//#include "InputTriggers.h"
 
 ATank::ATank()
 {
@@ -54,25 +52,19 @@ void ATank::Action_ControllerTurn(const FInputActionValue &value)
 }
 void ATank::Action_ControllerRotateTurret(const FInputActionValue &value)
 {
-	UE_LOG(LogTemp, Display, TEXT("Rotate Value: %f"), value.Get<float>());
-}
-
-void ATank::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 	if (PlayController)
 	{
 		FHitResult HitResult;
 		PlayController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,
 			false,
 			HitResult);
-		DrawDebugSphere(
-			GetWorld(),
-			HitResult.ImpactPoint,
-			25.f,
-			12,
-			FColor::Red,
-			false,
-			-1.f);
+		RotateTurret(HitResult.ImpactPoint);
+
 	}
+}
+
+void ATank::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	
 }

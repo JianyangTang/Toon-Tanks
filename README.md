@@ -40,3 +40,6 @@ Lesson 125: learn cast.
 Lesson 126: get the hit result under the cursor.PlayController->GetHitResultUnderCursor
 DrawDebugSphere
 
+Lesson 127&128: Rotate the Turret and tower.
+Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
+
