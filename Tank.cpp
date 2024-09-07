@@ -5,7 +5,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
-#include "InputTriggers.h"
+#include "Kismet/GameplayStatics.h"
+//#include "InputTriggers.h"
 
 ATank::ATank()
 {
@@ -43,7 +44,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void ATank::Action_ControllerMoveForward(const FInputActionValue &value)
 {
 	FVector DeltaLocation = FVector::ZeroVector;
-	DeltaLocation.X = 1.f * value.Get<float>();
+	DeltaLocation.X = Speed * value.GetMagnitude() * UGameplayStatics::GetWorldDeltaSeconds(this);
 	AddActorLocalOffset(DeltaLocation);
 }
 void ATank::Action_ControllerTurn(const FInputActionValue &value)

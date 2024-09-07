@@ -32,6 +32,8 @@ private:
 	class USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* Camera;
+	UPROPERTY(EditAnywhere)
+	float Speed = 100;
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Input")
 	TObjectPtr<UInputMappingContext> IMC_Default;
