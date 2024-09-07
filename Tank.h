@@ -32,7 +32,6 @@ private:
 	class USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* Camera;
-	void Move(float Value);
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Input")
 	TObjectPtr<UInputMappingContext> IMC_Default;

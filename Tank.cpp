@@ -33,7 +33,6 @@ void ATank::BeginPlay()
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(IA_MoveForward, ETriggerEvent::Triggered, this, &ATank::Action_ControllerMoveForward);
@@ -41,14 +40,11 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(IA_Turn, ETriggerEvent::Triggered, this, &ATank::Action_ControllerTurn);
 	}
 }
-
-void ATank::Move(float Value)
-{
-	//UE_LOG(LogTemp, Display, TEXT("Value: %f"), Value);
-}
 void ATank::Action_ControllerMoveForward(const FInputActionValue &value)
 {
-	UE_LOG(LogTemp, Display, TEXT("Forward Value: %f"),value.Get<float>());
+	FVector DeltaLocation = FVector::ZeroVector;
+	DeltaLocation.X = 1.f * value.Get<float>();
+	AddActorLocalOffset(DeltaLocation);
 }
 void ATank::Action_ControllerTurn(const FInputActionValue &value)
 {

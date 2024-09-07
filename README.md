@@ -29,3 +29,5 @@ Lesson 120: Set Auto Possess Player of Tank instance to Player 0.
 
 Lesson 121: Bind axis mapping to function.
 Lesson 121.5: Learned from other lesson, know how to bind input action values to functions in C++, especially by enhanced input system.
+
+Lesson 122: Add actor local offset.
