@@ -46,5 +46,5 @@ public:
 	TObjectPtr<UInputAction> IA_Turn;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Input")
 	TObjectPtr<UInputAction> IA_RotateTurret;
-
+	virtual void Tick(float DeltaTime) override;
 };

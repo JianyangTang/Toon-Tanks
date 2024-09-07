@@ -36,3 +36,7 @@ Lesson 123: Add movespeed independent with deltatime.
 Lesson 124: add actor locao rotation, and learn idea of sweep(collision).
 
 Lesson 125: learn cast.
+
+Lesson 126: get the hit result under the cursor.PlayController->GetHitResultUnderCursor
+DrawDebugSphere
+
