@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
+#include "InputTriggers.h"
 
 ATank::ATank()
 {
@@ -13,15 +14,47 @@ ATank::ATank()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
 }
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	if (APlayerController* PlayController = CastChecked<APlayerController>(GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* EnhancedSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayController->GetLocalPlayer()))
+		{
+			EnhancedSubsystem->AddMappingContext(IMC_Default, 0);
+		}
+		
+
+	}
+}
 
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EnhancedInputComponent->BindAction(IA_MoveForward, ETriggerEvent::Triggered, this, &ATank::Action_ControllerMoveForward);
+		EnhancedInputComponent->BindAction(IA_RotateTurret, ETriggerEvent::Triggered, this, &ATank::Action_ControllerRotateTurret);
+		EnhancedInputComponent->BindAction(IA_Turn, ETriggerEvent::Triggered, this, &ATank::Action_ControllerTurn);
+	}
 }
 
 void ATank::Move(float Value)
 {
-	UE_LOG(LogTemp, Display, TEXT("Value: %f"), Value);
+	//UE_LOG(LogTemp, Display, TEXT("Value: %f"), Value);
+}
+void ATank::Action_ControllerMoveForward(const FInputActionValue &value)
+{
+	UE_LOG(LogTemp, Display, TEXT("Forward Value: %f"),value.Get<float>());
+}
+void ATank::Action_ControllerTurn(const FInputActionValue &value)
+{
+	UE_LOG(LogTemp, Display, TEXT("Turn Value: %f"), value.Get<float>());
+}
+void ATank::Action_ControllerRotateTurret(const FInputActionValue &value)
+{
+	UE_LOG(LogTemp, Display, TEXT("Rotate Value: %f"), value.Get<float>());
 }
