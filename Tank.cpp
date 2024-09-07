@@ -18,8 +18,8 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	if (APlayerController* PlayController = CastChecked<APlayerController>(GetController()))
+	PlayController = Cast<APlayerController>(GetController());
+	if (PlayController)
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* EnhancedSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayController->GetLocalPlayer()))
 		{

@@ -36,6 +36,7 @@ private:
 	float MoveSpeed = 400;
 	UPROPERTY(EditAnywhere, Category = "Move")
 	float TurnSpeed = 100;
+	APlayerController* PlayController;
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Input")
 	TObjectPtr<UInputMappingContext> IMC_Default;
