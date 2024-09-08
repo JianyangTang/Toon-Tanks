@@ -49,3 +49,12 @@ Lesson 130: create a timer.
 GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &ATower::CheckFireCondition, FireRate, true);
 
 Lesson 131: create a Projectile C class and Blueprint class.
+
+Lesson 132: spawn projectile. 
+UPROPERTY(EditAnywhere, Category = "Combat")
+TSubclassOf<class AProjectile> ProjectileClass;
+
+GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
+	ProjectileSpawnPoint->GetComponentLocation(),
+	ProjectileSpawnPoint->GetComponentRotation());
+	
