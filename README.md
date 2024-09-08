@@ -44,3 +44,6 @@ Lesson 127&128: Rotate the Turret and tower.
 Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
 
 Lesson 129: bind IA_Fire and Fire() function.
+
+Lesson 130: create a timer.
+GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &ATower::CheckFireCondition, FireRate, true);
