@@ -27,6 +27,9 @@ void UHealthComponent::BeginPlay()
 
 void UHealthComponent::DamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* Instigator, AActor* DamageCauser)
 {
+	if (Damage <= 0.f) return;
+	HealthValue -= Damage;
+	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), HealthValue);
 }
 
 // Called every frame
