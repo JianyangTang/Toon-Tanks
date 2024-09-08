@@ -59,3 +59,8 @@ GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
 	ProjectileSpawnPoint->GetComponentRotation());
 
 Lesson 133: add ProjectileMovementComponent.
+
+Lesson 134: Hit Events
+ProjectileMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
+
+
