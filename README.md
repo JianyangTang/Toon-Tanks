@@ -63,4 +63,4 @@ Lesson 133: add ProjectileMovementComponent.
 Lesson 134: Hit Events
 ProjectileMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 
-
+Lesson 135: create and add Health Component.
