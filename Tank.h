@@ -25,6 +25,7 @@ protected:
 	void Action_ControllerMoveForward(const FInputActionValue &value);
 	void Action_ControllerTurn(const FInputActionValue &value);
 	void Action_ControllerRotateTurret(const FInputActionValue &value);
+	void Action_ControllerFire(const FInputActionValue& value);
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* SpringArm;
@@ -44,5 +45,7 @@ public:
 	TObjectPtr<UInputAction> IA_Turn;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Input")
 	TObjectPtr<UInputAction> IA_RotateTurret;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Input")
+	TObjectPtr<UInputAction> IA_Fire;
 	virtual void Tick(float DeltaTime) override;
 };

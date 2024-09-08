@@ -36,6 +36,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(IA_MoveForward, ETriggerEvent::Triggered, this, &ATank::Action_ControllerMoveForward);
 		EnhancedInputComponent->BindAction(IA_RotateTurret, ETriggerEvent::Triggered, this, &ATank::Action_ControllerRotateTurret);
 		EnhancedInputComponent->BindAction(IA_Turn, ETriggerEvent::Triggered, this, &ATank::Action_ControllerTurn);
+		EnhancedInputComponent->BindAction(IA_Fire, ETriggerEvent::Started, this, &ATank::Action_ControllerFire);
 	}
 }
 void ATank::Action_ControllerMoveForward(const FInputActionValue &value)
@@ -61,6 +62,11 @@ void ATank::Action_ControllerRotateTurret(const FInputActionValue &value)
 		RotateTurret(HitResult.ImpactPoint);
 
 	}
+}
+
+void ATank::Action_ControllerFire(const FInputActionValue& value)
+{
+	Fire();
 }
 
 void ATank::Tick(float DeltaTime)

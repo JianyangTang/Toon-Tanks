@@ -43,3 +43,4 @@ DrawDebugSphere
 Lesson 127&128: Rotate the Turret and tower.
 Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
 
+Lesson 129: bind IA_Fire and Fire() function.
