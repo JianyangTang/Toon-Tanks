@@ -57,4 +57,5 @@ TSubclassOf<class AProjectile> ProjectileClass;
 GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
 	ProjectileSpawnPoint->GetComponentLocation(),
 	ProjectileSpawnPoint->GetComponentRotation());
-	
+
+Lesson 133: add ProjectileMovementComponent.
