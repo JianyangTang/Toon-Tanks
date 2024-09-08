@@ -47,3 +47,5 @@ Lesson 129: bind IA_Fire and Fire() function.
 
 Lesson 130: create a timer.
 GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &ATower::CheckFireCondition, FireRate, true);
+
+Lesson 131: create a Projectile C class and Blueprint class.
