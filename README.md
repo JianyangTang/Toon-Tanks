@@ -73,3 +73,6 @@ Lesson 137: create Game Mode Class and set the default pawn.
 Lesson 138: handled actor death.
 
 Lesson 139: Create custom player controller.
+Problems: mouse input error while show mouse cursor.
+
+Lesson 140: Create HandleGameStart.

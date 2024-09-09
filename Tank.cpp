@@ -6,7 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "Kismet/GameplayStatics.h"
-
+#include "ToonTanksPlayerController.h"
 ATank::ATank()
 {
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
@@ -17,7 +17,7 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	TankPlayController = Cast<APlayerController>(GetController());
+	TankPlayController = Cast<AToonTanksPlayerController>(GetController());
 	if (TankPlayController)
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* EnhancedSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(TankPlayController->GetLocalPlayer()))
@@ -59,8 +59,10 @@ void ATank::Action_ControllerTurn(const FInputActionValue &value)
 }
 void ATank::Action_ControllerRotateTurret(const FInputActionValue &value)
 {
+	UE_LOG(LogTemp, Display, TEXT("Rotate Function success"));
 	if (TankPlayController)
 	{
+		UE_LOG(LogTemp, Display, TEXT("IF success"));
 		FHitResult HitResult;
 		TankPlayController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,
 			false,
