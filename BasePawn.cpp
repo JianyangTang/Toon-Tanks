@@ -51,4 +51,10 @@ void ABasePawn::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void ABasePawn::HandleDestruction()
+{
+	// TODO: Visual/sound effects
+
+}
+
 

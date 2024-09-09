@@ -19,6 +19,8 @@ public:
 	ATank();
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	void HandleDestruction();
+	APlayerController* GetTankPlayerController() const { return TankPlayController; }
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -35,7 +37,7 @@ private:
 	float MoveSpeed = 400;
 	UPROPERTY(EditAnywhere, Category = "Move")
 	float TurnSpeed = 100;
-	APlayerController* PlayController;
+	APlayerController* TankPlayController;
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Input")
 	TObjectPtr<UInputMappingContext> IMC_Default;

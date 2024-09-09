@@ -17,10 +17,10 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	PlayController = Cast<APlayerController>(GetController());
-	if (PlayController)
+	TankPlayController = Cast<APlayerController>(GetController());
+	if (TankPlayController)
 	{
-		if (UEnhancedInputLocalPlayerSubsystem* EnhancedSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayController->GetLocalPlayer()))
+		if (UEnhancedInputLocalPlayerSubsystem* EnhancedSubsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(TankPlayController->GetLocalPlayer()))
 		{
 			EnhancedSubsystem->AddMappingContext(IMC_Default, 0);
 		}
@@ -39,6 +39,12 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(IA_Fire, ETriggerEvent::Started, this, &ATank::Action_ControllerFire);
 	}
 }
+void ATank::HandleDestruction()
+{
+	Super::HandleDestruction();
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
 void ATank::Action_ControllerMoveForward(const FInputActionValue &value)
 {
 	FVector DeltaLocation = FVector::ZeroVector;
@@ -53,10 +59,10 @@ void ATank::Action_ControllerTurn(const FInputActionValue &value)
 }
 void ATank::Action_ControllerRotateTurret(const FInputActionValue &value)
 {
-	if (PlayController)
+	if (TankPlayController)
 	{
 		FHitResult HitResult;
-		PlayController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,
+		TankPlayController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,
 			false,
 			HitResult);
 		RotateTurret(HitResult.ImpactPoint);

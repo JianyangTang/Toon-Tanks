@@ -69,3 +69,5 @@ Lesson 136: applying damage.
 UGameplayStatics::ApplyDamage
 
 Lesson 137: create Game Mode Class and set the default pawn.
+
+Lesson 138: handled actor death.
