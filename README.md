@@ -67,3 +67,5 @@ Lesson 135: create and add Health Component.
 
 Lesson 136: applying damage.
 UGameplayStatics::ApplyDamage
+
+Lesson 137: create Game Mode Class and set the default pawn.
