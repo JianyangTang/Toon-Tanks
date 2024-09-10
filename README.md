@@ -83,5 +83,5 @@ Lesson 142&143: create variable 'countdown' and test.
 
 Lesson 144&145: Create win/lose conditions and count tower numbers.
 
-Lesson 146: Add hit particle.
+Lesson 146&146&147: Add hit, trail and dead particle in projectile.
 

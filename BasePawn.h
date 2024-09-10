@@ -29,6 +29,8 @@ private:
 	USceneComponent* ProjectileSpawnPoint;
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TSubclassOf<class AProjectile> ProjectileClass;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class UParticleSystem* DeadParticles;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

@@ -38,4 +38,6 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "CPP Components")
 	class UParticleSystem* HitParticles;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
+	class UParticleSystemComponent* TrailParticles;
 };
