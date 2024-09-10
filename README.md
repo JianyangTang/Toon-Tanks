@@ -88,3 +88,5 @@ Lesson 146&146&147: Add hit, trail and dead particle in projectile.
 Lesson 148: Add sound.
 
 Lesson 149: Add camera shake.
+
+Lesson 150: Finish class! And BELIEVE I can make it better!
