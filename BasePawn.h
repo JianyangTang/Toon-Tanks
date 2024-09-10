@@ -33,6 +33,8 @@ private:
 	class UParticleSystem* DeadParticles;
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	class USoundBase* DeadSound;
+	UPROPERTY(EditAnywhere, Category = "CPP Components")
+	TSubclassOf<class UCameraShakeBase> DeathCameraShakeClass;
 
 public:
 	// Called every frame

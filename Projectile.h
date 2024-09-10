@@ -38,7 +38,8 @@ private:
 	USoundBase* HitSound;
 	UPROPERTY(EditAnywhere)
 	float Damage = 50.f;
-
+	UPROPERTY(EditAnywhere, Category = "CPP Components")
+	TSubclassOf<class UCameraShakeBase> HitCameraShakeClass;
 	UPROPERTY(EditAnywhere, Category = "CPP Components")
 	class UParticleSystem* HitParticles;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
