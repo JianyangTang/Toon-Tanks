@@ -85,3 +85,4 @@ Lesson 144&145: Create win/lose conditions and count tower numbers.
 
 Lesson 146&146&147: Add hit, trail and dead particle in projectile.
 
+Lesson 148: Add sound.

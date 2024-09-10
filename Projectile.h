@@ -32,7 +32,10 @@ private:
 	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 		UPrimitiveComponent* OtherComp, FVector NormalImpulse, 
 		const FHitResult& Hit);
-
+	UPROPERTY(EditAnywhere, Category = "CPP Components")
+	class USoundBase* LaunchSound;
+	UPROPERTY(EditAnywhere, Category = "CPP Components")
+	USoundBase* HitSound;
 	UPROPERTY(EditAnywhere)
 	float Damage = 50.f;
 
