@@ -80,3 +80,5 @@ Lesson 140: Create HandleGameStart.
 Lesson 141: Create start game widget blueprint.
 
 Lesson 142&143: create variable 'countdown' and test.
+
+Lesson 144: Create win/lose conditions and count tower numbers.
