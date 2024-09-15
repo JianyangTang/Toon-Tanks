@@ -13,6 +13,8 @@ class TOONTANKS_API ABasePawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ABasePawn();
+	UStaticMeshComponent* GetBaseMesh() { return BaseMesh; }
+	UStaticMeshComponent* GetTurretMesh() { return TurretMesh; }
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

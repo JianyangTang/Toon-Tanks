@@ -33,12 +33,14 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		EnhancedInputComponent->BindAction(IA_MoveForward, ETriggerEvent::Triggered, this, &ATank::Action_ControllerMoveForward);
-		EnhancedInputComponent->BindAction(IA_RotateTurret, ETriggerEvent::Triggered, this, &ATank::Action_ControllerRotateTurret);
-		EnhancedInputComponent->BindAction(IA_Turn, ETriggerEvent::Triggered, this, &ATank::Action_ControllerTurn);
-		EnhancedInputComponent->BindAction(IA_Fire, ETriggerEvent::Started, this, &ATank::Action_ControllerFire);
+		EnhancedInputComponent->BindAction(IA_MoveForward, ETriggerEvent::Triggered, this, &ATank::ActionControl_MoveForward);
+		EnhancedInputComponent->BindAction(IA_RotateTurretYaw, ETriggerEvent::Triggered, this, &ATank::ActionControl_RotateTurretYaw);
+		EnhancedInputComponent->BindAction(IA_RotateTurretPitch, ETriggerEvent::Triggered, this, &ATank::ActionControl_RotateTurretPitch);
+		EnhancedInputComponent->BindAction(IA_Turn, ETriggerEvent::Triggered, this, &ATank::ActionControl_Turn);
+		EnhancedInputComponent->BindAction(IA_Fire, ETriggerEvent::Started, this, &ATank::ActionControl_Fire);
 	}
 }
+
 void ATank::HandleDestruction()
 {
 	Super::HandleDestruction();
@@ -46,36 +48,56 @@ void ATank::HandleDestruction()
 	SetActorTickEnabled(false);
 	bAlive = false;
 }
-void ATank::Action_ControllerMoveForward(const FInputActionValue &value)
+
+void ATank::ActionControl_MoveForward(const FInputActionValue &value)
 {
-	FVector DeltaLocation = FVector::ZeroVector;
-	DeltaLocation.X = MoveSpeed * value.GetMagnitude() * UGameplayStatics::GetWorldDeltaSeconds(this);
-	AddActorLocalOffset(DeltaLocation, true);
+	AddMovementInput(GetBaseMesh()->GetForwardVector(), value.GetMagnitude());
 }
-void ATank::Action_ControllerTurn(const FInputActionValue &value)
+
+void ATank::ActionControl_Turn(const FInputActionValue &value)
 {
 	FRotator DeltaRotation = FRotator::ZeroRotator;
 	DeltaRotation.Yaw = - TurnSpeed * value.GetMagnitude() * UGameplayStatics::GetWorldDeltaSeconds(this);
-	AddActorLocalRotation(DeltaRotation, true);
+	GetBaseMesh()->AddLocalRotation(DeltaRotation, true);
 }
-void ATank::Action_ControllerRotateTurret(const FInputActionValue &value)
+
+void ATank::ActionControl_RotateTurretYaw(const FInputActionValue &value)
 {
-	UE_LOG(LogTemp, Display, TEXT("Rotate Function success"));
+	AddControllerYawInput(value.GetMagnitude() * RotationRate * GetWorld()->GetDeltaSeconds());
+	CallRotateTurret();
+}
+
+void ATank::ActionControl_Fire(const FInputActionValue& value)
+{
+	CallRotateTurret();
+	Fire();
+}
+
+void ATank::ActionControl_RotateTurretPitch(const FInputActionValue& value)
+{
+	AddControllerPitchInput(value.GetMagnitude() * RotationRate * GetWorld()->GetDeltaSeconds());
+	CallRotateTurret();
+}
+
+void ATank::CallRotateTurret()
+{
 	if (TankPlayController)
 	{
-		UE_LOG(LogTemp, Display, TEXT("IF success"));
 		FHitResult HitResult;
-		TankPlayController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,
-			false,
-			HitResult);
-		RotateTurret(HitResult.ImpactPoint);
-
+		FVector VP_Location;
+		FRotator VP_Rotation;
+		TankPlayController->GetPlayerViewPoint(VP_Location, VP_Rotation);
+		FVector VP_EndLocation = VP_Location + VP_Rotation.Vector() * MaxRange;
+		bool bSuccess = GetWorld()->LineTraceSingleByChannel(HitResult,
+			VP_Location,
+			VP_EndLocation,
+			ECollisionChannel::ECC_GameTraceChannel1);
+		if (bSuccess)
+		{
+			//DrawDebugPoint(GetWorld(), HitResult.Location, 20, FColor::Red, false,0.5);
+			RotateTurret(HitResult.Location);
+		}
 	}
-}
-
-void ATank::Action_ControllerFire(const FInputActionValue& value)
-{
-	Fire();
 }
 
 void ATank::Tick(float DeltaTime)
