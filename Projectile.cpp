@@ -6,6 +6,7 @@
 #include "GameFramework/DamageType.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "BrickFractureField.h"
 #include "Camera/CameraShakeBase.h"
 // Sets default values
 AProjectile::AProjectile()
@@ -20,6 +21,7 @@ AProjectile::AProjectile()
 	ProjectileMovementComponent->MaxSpeed = 3000.f;
 	ProjectileMovementComponent->InitialSpeed = 3000.f;
 	ProjectileMovementComponent->ProjectileGravityScale = 0.0;
+	ProjectileMesh->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
 
 }
 
@@ -74,6 +76,10 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimi
 			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitCameraShakeClass);
 		}
 	}
+	ABrickFractureField* BrickFractureField = GetWorld()->SpawnActor<ABrickFractureField>(
+		BrickFractureFieldClass,
+		GetActorLocation(),
+		GetActorRotation());
 	Destroy();
 }
 

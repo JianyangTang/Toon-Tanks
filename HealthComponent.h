@@ -15,7 +15,7 @@ class TOONTANKS_API UHealthComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UHealthComponent();
-
+	void SetMaxHealth(float Maxvalue);
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

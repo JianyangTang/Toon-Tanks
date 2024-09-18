@@ -15,6 +15,11 @@ UHealthComponent::UHealthComponent()
 }
 
 
+void UHealthComponent::SetMaxHealth(float Maxvalue)
+{
+	MaxHealth = Maxvalue;
+}
+
 // Called when the game starts
 void UHealthComponent::BeginPlay()
 {

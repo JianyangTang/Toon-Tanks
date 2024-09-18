@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Tank.h"
 #include "Tower.h"
+#include "BrickWall.h"
 #include "ToonTanksPlayerController.h"
 void AToonTanksGameMode::ActorDied(AActor* DeadActor)
 {
@@ -26,6 +27,10 @@ void AToonTanksGameMode::ActorDied(AActor* DeadActor)
 		{
 			GameOver(true);
 		}
+	}
+	else if (ABrickWall* DestoryedBrickWall = Cast<ABrickWall>(DeadActor))
+	{
+		DestoryedBrickWall->HandleDestruction();
 	}
 }
 

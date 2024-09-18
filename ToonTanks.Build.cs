@@ -10,7 +10,7 @@ public class ToonTanks : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "EnhancedInput" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "EnhancedInput", "GeometryCollectionEngine" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
