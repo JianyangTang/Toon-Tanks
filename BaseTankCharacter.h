@@ -3,16 +3,17 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
-#include "BasePawn.generated.h"
+#include "GameFramework/Character.h"
+#include "BaseTankCharacter.generated.h"
 
 UCLASS()
-class TOONTANKS_API ABasePawn : public APawn
+class TOONTANKS_API ABaseTankCharacter : public ACharacter
 {
 	GENERATED_BODY()
+
 public:
-	// Sets default values for this pawn's properties
-	ABasePawn();
+	// Sets default values for this character's properties
+	ABaseTankCharacter();
 	UStaticMeshComponent* GetBaseMesh() { return BaseMesh; }
 	UStaticMeshComponent* GetTurretMesh() { return TurretMesh; }
 protected:
@@ -20,9 +21,8 @@ protected:
 	virtual void BeginPlay() override;
 	void RotateTurret(FVector LookAtLocation);
 	void Fire();
+	void HandleDestruction();
 private:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
-	class UBoxComponent* BoxCollision;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* BaseMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
@@ -39,11 +39,11 @@ private:
 	class USoundBase* DeadSound;
 	UPROPERTY(EditAnywhere, Category = "CPP Components")
 	TSubclassOf<class UCameraShakeBase> DeathCameraShakeClass;
-
-public:
+public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	void HandleDestruction();
 
-	
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 };

@@ -1,24 +1,21 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "BasePawn.h"
-#include "Components/CapsuleComponent.h"
-#include "Components/BoxComponent.h"
+#include "BaseTankCharacter.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Kismet/GameplayStatics.h"
 #include "Projectile.h"
 #include "HealthComponent.h"
 #include "Camera/CameraShakeBase.h"
 // Sets default values
-ABasePawn::ABasePawn()
+ABaseTankCharacter::ABaseTankCharacter()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collider"));
-	RootComponent = BoxCollision;
 	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Base Mesh"));
-	BaseMesh->SetupAttachment(BoxCollision);
+	BaseMesh->SetupAttachment(GetMesh());
 	TurretMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Turret Mesh"));
 	TurretMesh->SetupAttachment(BaseMesh);
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Point"));
@@ -27,36 +24,32 @@ ABasePawn::ABasePawn()
 }
 
 // Called when the game starts or when spawned
-void ABasePawn::BeginPlay()
+void ABaseTankCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-void ABasePawn::RotateTurret(FVector LookAtLocation)
+void ABaseTankCharacter::RotateTurret(FVector LookAtLocation)
 {
 	FVector ToTarget = LookAtLocation - TurretMesh->GetComponentLocation();
-	//DrawDebugPoint(GetWorld(), TurretMesh->GetComponentLocation(), 20, FColor::Red,false,0.5);
 	TurretMesh->SetWorldRotation(ToTarget.Rotation());
 }
 
-void ABasePawn::Fire()
+void ABaseTankCharacter::Fire()
 {
-	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
-		ProjectileSpawnPoint->GetComponentLocation(),
-		ProjectileSpawnPoint->GetComponentRotation());
-	Projectile->SetOwner(this);
+	if (ProjectileClass)
+	{
+			AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass,
+        		ProjectileSpawnPoint->GetComponentLocation(),
+        		ProjectileSpawnPoint->GetComponentRotation());
+        	Projectile->SetOwner(this);
+	}
+
 }
 
-// Called every frame
-void ABasePawn::Tick(float DeltaTime)
+void ABaseTankCharacter::HandleDestruction()
 {
-	Super::Tick(DeltaTime);
-}
-
-void ABasePawn::HandleDestruction()
-{
-	// TODO: Visual/sound effects
 	if (DeadParticles)
 	{
 		UGameplayStatics::SpawnEmitterAtLocation(this,
@@ -74,7 +67,19 @@ void ABasePawn::HandleDestruction()
 	{
 		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
 	}
-	
 }
 
+// Called every frame
+void ABaseTankCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+}
+
+// Called to bind functionality to input
+void ABaseTankCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+}
 

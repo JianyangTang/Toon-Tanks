@@ -3,6 +3,7 @@
 
 #include "Tank.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -13,6 +14,7 @@ ATank::ATank()
 	SpringArm->SetupAttachment(RootComponent);
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
+	FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Floating Pawn Movement"));
 }
 void ATank::BeginPlay()
 {
@@ -51,14 +53,16 @@ void ATank::HandleDestruction()
 
 void ATank::ActionControl_MoveForward(const FInputActionValue &value)
 {
-	AddMovementInput(GetBaseMesh()->GetForwardVector(), value.GetMagnitude());
+	AddMovementInput(GetBaseMesh()->GetForwardVector(), value.GetMagnitude() * MoveSpeed * GetWorld()->GetDeltaSeconds(),true);
+
 }
 
 void ATank::ActionControl_Turn(const FInputActionValue &value)
 {
 	FRotator DeltaRotation = FRotator::ZeroRotator;
 	DeltaRotation.Yaw = - TurnSpeed * value.GetMagnitude() * UGameplayStatics::GetWorldDeltaSeconds(this);
-	GetBaseMesh()->AddLocalRotation(DeltaRotation, true);
+	GetBaseMesh()->SetWorldRotation(GetBaseMesh()->GetComponentRotation()+DeltaRotation,true);
+	//GetBaseMesh()->AddLocalRotation(DeltaRotation, true);
 }
 
 void ATank::ActionControl_RotateTurretYaw(const FInputActionValue &value)

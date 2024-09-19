@@ -3,20 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BasePawn.h"
+#include "BaseTankCharacter.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "Tank.generated.h"
+#include "MyTankCharacter.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TOONTANKS_API ATank : public ABasePawn
+class TOONTANKS_API AMyTankCharacter : public ABaseTankCharacter
 {
 	GENERATED_BODY()
 public:
-	ATank();
+	AMyTankCharacter();
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	void HandleDestruction();
@@ -26,19 +26,18 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	void ActionControl_MoveForward(const FInputActionValue &value);
-	void ActionControl_Turn(const FInputActionValue &value);
-	void ActionControl_RotateTurretYaw(const FInputActionValue &value);
+	void ActionControl_MoveForward(const FInputActionValue& value);
+	void ActionControl_Turn(const FInputActionValue& value);
+	void ActionControl_RotateTurretYaw(const FInputActionValue& value);
 	void ActionControl_Fire(const FInputActionValue& value);
 	void ActionControl_RotateTurretPitch(const FInputActionValue& value);
 	void CallRotateTurret();
+	void RotateBase();
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* Camera;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CPP Components", meta = (AllowPrivateAccess = "true"))
-	class UFloatingPawnMovement* FloatingPawnMovement;
 	UPROPERTY(EditAnywhere, Category = "Move")
 	float TurnSpeed = 300;
 	class AToonTanksPlayerController* TankPlayController;

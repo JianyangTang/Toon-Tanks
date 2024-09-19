@@ -23,7 +23,7 @@ protected:
 	void GameOver(bool bWonGame);
 
 private:
-	class ATank* Tank;
+	class AMyTankCharacter* MyTank;
 	class AToonTanksPlayerController* ToonTanksPlayerController;
 	float StartDelay = 3.f;
 	void HandleGameStart();
